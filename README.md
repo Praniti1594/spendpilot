@@ -1,36 +1,134 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SpendPilot - AI Spend Audit Tool
 
-## Getting Started
+An AI-powered SaaS MVP that analyzes company spending on AI tools and recommends cost optimization strategies.
 
-First, run the development server:
+## 🚀 Quick Start
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Prerequisites
+- Node.js 18+
+- Supabase project
+- Groq API key
+
+### Setup
+1. Install dependencies: `npm install`
+2. Follow [BACKEND_SETUP.md](./BACKEND_SETUP.md) to configure Supabase & Groq
+3. Update `.env.local` with your API credentials
+4. Run: `npm run dev`
+5. Open http://localhost:3000
+
+## 🏗️ Architecture
+
+### Backend (Complete ✅)
+- **API Routes**: RESTful endpoints for audits
+- **Audit Engine**: Deterministic spend analysis logic
+- **Groq AI**: Personalized summary generation
+- **Supabase**: PostgreSQL database for audit storage
+
+### Frontend (In Progress)
+- Spend audit form
+- Real-time results display
+- Public sharing pages
+- Mobile responsive
+
+## 📊 User Flow
+
+1. **Landing**: Visitor arrives at homepage
+2. **Input**: Enter AI tools, plans, spend, and seat counts
+3. **Instant Analysis**: Get recommendations and savings calculation
+4. **AI Summary**: Personalized optimization insights
+5. **Share**: Generate public result URL
+6. **Lead Capture**: Optional signup after value shown
+
+## 🎯 Features
+
+### Core
+- ✅ No auth required (form state in localStorage)
+- ✅ Deterministic audit logic
+- ✅ Finance-literate recommendations
+- ✅ 8 supported AI tools
+- ✅ Annual savings calculations
+- ✅ Public result pages
+
+### AI Integration
+- ✅ Groq API for summaries (Llama 3.1 70B)
+- ✅ Only used for personalized text
+- ✅ Audit logic is deterministic
+
+### Security
+- ✅ Public result pages hide sensitive input data
+- ✅ Form data stored in localStorage (not sent anywhere until user submits)
+- ✅ Supabase RLS policies for access control
+
+## 📁 Project Structure
+
+```
+├── app/
+│   ├── api/audits/          # API routes
+│   ├── layout.tsx           # Root layout
+│   └── page.tsx             # Homepage
+├── lib/
+│   ├── db/                  # Database & types
+│   ├── audit/               # Business logic
+│   └── utils/               # Helpers
+├── public/                  # Static assets
+├── .env.local               # Environment variables (add your keys here)
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔧 Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Frontend**: Next.js 14+, React, TypeScript, Tailwind CSS, shadcn/ui
+- **Backend**: Next.js API Routes, Node.js
+- **Database**: Supabase (PostgreSQL)
+- **AI**: Groq API (Llama 3.1 70B)
+- **Deployment**: Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📝 API Endpoints
 
-## Learn More
+### POST /api/audits
+Create a new spend audit.
 
-To learn more about Next.js, take a look at the following resources:
+### GET /api/audits/[id]
+Retrieve a public audit result.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### PATCH /api/audits/[id]
+Update audit (make public, add summary).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+See [BACKEND_SETUP.md](./BACKEND_SETUP.md) for detailed API reference and examples.
 
-## Deploy on Vercel
+## 🛠️ Development
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Run dev server
+```bash
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Build
+```bash
+npm run build
+```
+
+### Test API
+See cURL examples in [BACKEND_SETUP.md](./BACKEND_SETUP.md)
+
+## 📚 Documentation
+
+- [BACKEND_SETUP.md](./BACKEND_SETUP.md) - Backend configuration & API reference
+- API types in [lib/db/types.ts](./lib/db/types.ts)
+- Audit logic in [lib/audit/engine.ts](./lib/audit/engine.ts)
+
+## 🚀 Deployment
+
+Deploy to Vercel:
+1. Push to GitHub
+2. Connect Vercel to repo
+3. Add environment variables to Vercel dashboard
+4. Deploy
+
+## 📄 License
+
+MIT
+
+---
+
+**Current Status**: Phase 1 (Backend) complete. Next: Frontend development.
