@@ -1,65 +1,68 @@
-import Image from "next/image";
+'use client'
+
+import { AuditForm } from './components/audit-form'
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      {/* Header */}
+      <header className="border-b border-gray-200 bg-white">
+        <div className="mx-auto max-w-4xl px-4 py-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">SpendPilot</h1>
+              <p className="text-sm text-gray-600">AI Spend Audit & Optimization</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="border-b border-gray-200 bg-white">
+        <div className="mx-auto max-w-4xl px-4 py-12">
+          <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+            Optimize your AI tool spending
+          </h2>
+          <p className="mt-4 text-xl text-gray-600">
+            Get personalized recommendations to reduce costs on ChatGPT, Claude, GitHub Copilot, and more. 
+            Identify overlapping tools, negotiate better rates, and eliminate waste.
           </p>
+          <div className="mt-8 grid gap-6 sm:grid-cols-3">
+            <div className="flex gap-3">
+              <div className="text-2xl">📊</div>
+              <div>
+                <p className="font-semibold text-gray-900">Instant Analysis</p>
+                <p className="text-sm text-gray-600">See your audit results in seconds</p>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <div className="text-2xl">🎯</div>
+              <div>
+                <p className="font-semibold text-gray-900">Smart Recommendations</p>
+                <p className="text-sm text-gray-600">Finance-grade suggestions, not guesses</p>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <div className="text-2xl">🔒</div>
+              <div>
+                <p className="font-semibold text-gray-900">Your Data</p>
+                <p className="text-sm text-gray-600">No login required, shared if you choose</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </section>
+
+      {/* Form Section */}
+      <section className="mx-auto max-w-4xl px-4 py-12">
+        <h3 className="mb-8 text-2xl font-bold text-gray-900">Add your AI tool subscriptions</h3>
+        <AuditForm />
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-gray-200 bg-gray-50 py-8 text-center text-sm text-gray-600">
+        <p>SpendPilot © 2024. Get smarter with your AI spend.</p>
+      </footer>
     </div>
-  );
+  )
 }

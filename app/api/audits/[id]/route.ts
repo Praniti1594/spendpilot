@@ -8,26 +8,25 @@ export async function GET(
 ) {
   try {
     const { id } = await params
-    const supabase = initSupabase()
+    const supabase = initSupabaseAdmin()
 
-    // First try to get from public audits (anyone can access)
-    const { data: publicData } = await supabase
+    // For MVP: anyone with the ID can view the audit
+    // The ID acts as a secret token (like Vercel deploy links)
+    // Later we can add user auth + private audits
+    const { data: audit, error } = await supabase
       .from('audits')
       .select('*')
       .eq('id', id)
-      .eq('is_public', true)
       .single()
 
-    if (publicData) {
-      return NextResponse.json(transformRecord(publicData))
+    if (error || !audit) {
+      return NextResponse.json(
+        { error: 'Audit not found' },
+        { status: 404 }
+      )
     }
 
-    // For private audits, we'd implement auth later
-    // For now, just return not found if not public
-    return NextResponse.json(
-      { error: 'Audit not found' },
-      { status: 404 }
-    )
+    return NextResponse.json(transformRecord(audit))
   } catch (error) {
     console.error('API error:', error)
     return NextResponse.json(
