@@ -22,6 +22,7 @@ export function ResultsDisplay({ auditId }: { auditId: string }) {
   const [audit, setAudit] = useState<AuditResult | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [summaryLoading, setSummaryLoading] = useState(false)
 
   useEffect(() => {
     const fetchAudit = async () => {
@@ -30,6 +31,24 @@ export function ResultsDisplay({ auditId }: { auditId: string }) {
         if (!response.ok) throw new Error('Audit not found')
         const data = await response.json()
         setAudit(data)
+
+        // If no summary yet, generate it asynchronously
+        if (!data.summary) {
+          setSummaryLoading(true)
+          try {
+            const summaryResponse = await fetch(`/api/audits/${auditId}/summary`, {
+              method: 'POST',
+            })
+            if (summaryResponse.ok) {
+              const updatedAudit = await summaryResponse.json()
+              setAudit(updatedAudit)
+            }
+          } catch (err) {
+            console.warn('Error generating summary:', err)
+          } finally {
+            setSummaryLoading(false)
+          }
+        }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load audit')
       } finally {
@@ -159,12 +178,16 @@ export function ResultsDisplay({ auditId }: { auditId: string }) {
       </Card>
 
       {/* AI Summary */}
-      {audit.summary && (
+      {audit.summary || summaryLoading ? (
         <Card className="bg-blue-50">
           <h3 className="mb-2 text-lg font-semibold text-gray-900">AI Summary</h3>
-          <p className="text-sm text-gray-700">{audit.summary}</p>
+          {summaryLoading ? (
+            <p className="animate-pulse text-sm text-gray-500">Generating personalized summary...</p>
+          ) : (
+            <p className="text-sm text-gray-700">{audit.summary}</p>
+          )}
         </Card>
-      )}
+      ) : null}
 
       {/* Actions */}
       <div className="flex gap-3">
