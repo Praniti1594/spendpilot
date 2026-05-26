@@ -68,3 +68,37 @@ export interface AuditRecord {
   created_at: string
   updated_at: string
 }
+
+// Lead capture data
+export interface LeadData {
+  email: string
+  companyName?: string
+  roleTitle?: string
+  teamSize?: number
+  auditId: string
+  savingsAmount: number
+}
+
+// Lead record from database
+export interface LeadRecord {
+  id: string
+  email: string
+  company_name: string | null
+  role_title: string | null
+  team_size: number | null
+  audit_id: string
+  savings_amount: number
+  created_at: string
+}
+
+// Lead submission request
+export interface LeadSubmissionRequest {
+  email: string
+  companyName?: string
+  roleTitle?: string
+  teamSize?: number
+  auditId: string
+  savingsAmount: number
+  summary?: string // Optional audit summary
+  honeypot?: string // Abuse protection field
+}

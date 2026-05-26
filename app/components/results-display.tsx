@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { AuditResult } from '@/lib/db/types'
 import { Badge, Card, Button } from '../components/ui'
+import { LeadCapture } from './lead-capture'
 
 const confidenceColors = {
   high: 'success',
@@ -188,6 +189,14 @@ export function ResultsDisplay({ auditId }: { auditId: string }) {
           )}
         </Card>
       ) : null}
+
+      {/* Lead Capture */}
+      <LeadCapture
+        auditId={audit.id}
+        monthlySavings={audit.totalMonthlySavings}
+        annualSavings={audit.totalAnnualSavings}
+        summary={audit.summary || undefined}
+      />
 
       {/* Actions */}
       <div className="flex gap-3">
